@@ -1,0 +1,2254 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Werte-Kompass</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: #f4f6f8;
+    color: #17202a;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    background: #17202a;
+    color: white;
+    padding: 45px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0 0 10px;
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    letter-spacing: -0.04em;
+}
+
+header p {
+    max-width: 720px;
+    margin: auto;
+    color: #cbd3dc;
+    font-size: 1rem;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+    width: min(850px, calc(100% - 24px));
+    margin: auto;
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-container {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+
+    background: rgba(244,246,248,.94);
+    backdrop-filter: blur(10px);
+
+    padding: 10px 0;
+}
+
+.progress {
+    height: 8px;
+    background: #dfe4e9;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+
+    background: #315efb;
+
+    transition: width .2s;
+}
+
+
+/* =========================
+   QUESTIONS
+========================= */
+
+.question {
+    background: white;
+
+    margin: 16px 0;
+    padding: 24px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.06);
+}
+
+.question-header {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+.number {
+    flex-shrink: 0;
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+
+    background: #eef2ff;
+    color: #315efb;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+}
+
+.question h2 {
+    font-size: 1.1rem;
+    margin: 3px 0 0;
+}
+
+.category {
+    color: #737d89;
+
+    font-size: .85rem;
+
+    margin: 8px 0 20px 50px;
+}
+
+
+/* =========================
+   0–5 SCALE
+========================= */
+
+.scale {
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, 1fr);
+
+    gap: 8px;
+}
+
+.scale button {
+
+    border: 2px solid #e1e5ea;
+
+    background: white;
+    color: #17202a;
+
+    border-radius: 12px;
+
+    padding: 13px 5px;
+
+    font-size: 1rem;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        .15s;
+}
+
+.scale button:hover {
+    border-color: #315efb;
+}
+
+.scale button.selected {
+
+    background: #315efb;
+
+    color: white;
+
+    border-color: #315efb;
+
+    transform: scale(1.03);
+}
+
+
+.scale-labels {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    color: #7a8490;
+
+    font-size: .75rem;
+
+    margin-top: 8px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.actions {
+
+    text-align: center;
+
+    padding:
+        30px 0
+        60px;
+}
+
+.main-button {
+
+    border: none;
+
+    background: #315efb;
+    color: white;
+
+    padding:
+        15px 25px;
+
+    border-radius: 14px;
+
+    font-size: 1rem;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    margin: 5px;
+}
+
+.main-button:hover {
+    opacity: .9;
+}
+
+.secondary {
+
+    background: white;
+
+    color: #17202a;
+
+    border:
+        1px solid #dce1e6;
+}
+
+
+/* =========================
+   RESULTS
+========================= */
+
+.results {
+
+    display: none;
+
+    padding:
+        30px 0
+        70px;
+}
+
+
+.result-main {
+
+    background: #17202a;
+
+    color: white;
+
+    border-radius: 25px;
+
+    padding: 30px;
+
+    margin-bottom: 18px;
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.08);
+}
+
+.result-main small {
+
+    color: #aeb8c5;
+
+    text-transform: uppercase;
+
+    letter-spacing: .12em;
+
+    font-size: .75rem;
+
+    font-weight: bold;
+}
+
+.result-main h2 {
+
+    font-size:
+        clamp(2.3rem, 10vw, 4rem);
+
+    margin:
+        5px 0;
+
+    letter-spacing:
+        -0.04em;
+}
+
+.result-main p {
+
+    color: #d3d9e0;
+
+    margin: 0;
+
+    line-height: 1.6;
+}
+
+
+/* =========================
+   RESULT GRID
+========================= */
+
+.result-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 18px;
+}
+
+
+.result-card {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 24px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.06);
+}
+
+.result-card h3 {
+
+    margin-top: 0;
+
+    font-size: 1.15rem;
+}
+
+
+/* =========================
+   MATCH BARS
+========================= */
+
+.match {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    margin:
+        12px 0
+        6px;
+}
+
+.bar {
+
+    height: 9px;
+
+    background: #e8ebef;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin-bottom: 10px;
+}
+
+.bar div {
+
+    height: 100%;
+
+    background: #315efb;
+
+    transition:
+        width .5s;
+}
+
+
+/* =========================
+   TAGS
+========================= */
+
+.tag {
+
+    display: inline-block;
+
+    background: #eef2ff;
+
+    color: #315efb;
+
+    padding:
+        5px 9px;
+
+    margin: 3px;
+
+    border-radius: 20px;
+
+    font-size: .8rem;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.explanation {
+
+    color: #687481;
+
+    line-height: 1.6;
+}
+
+
+/* =========================
+   WARNING
+========================= */
+
+.warning {
+
+    background: #fff8df;
+
+    border:
+        1px solid #eadb9a;
+
+    color: #66571c;
+
+    padding: 15px;
+
+    border-radius: 14px;
+
+    margin-top: 18px;
+
+    font-size: .9rem;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+
+    text-align: center;
+
+    padding:
+        25px 15px
+        35px;
+
+    color: #8a939e;
+
+    font-size: .75rem;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:650px) {
+
+    header {
+        padding:
+            30px 16px;
+    }
+
+    header h1 {
+        font-size: 2.3rem;
+    }
+
+    .question {
+
+        padding: 18px;
+
+        border-radius:
+            16px;
+    }
+
+    .category {
+
+        margin-left: 0;
+    }
+
+    .scale {
+
+        gap: 5px;
+    }
+
+    .scale button {
+
+        padding:
+            13px 2px;
+    }
+
+    .result-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .main-button {
+
+        width: 100%;
+
+        margin:
+            5px 0;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <h1>
+        🌍 Werte-Kompass
+    </h1>
+
+    <p>
+
+        35 Fragen zu Politik,
+        Staat und Gesellschaft.
+
+        Finde heraus, welches Land
+        am besten zu deinen Vorstellungen
+        passt und welche deutsche Partei
+        deinen Werten am nächsten kommt.
+
+    </p>
+
+</header>
+
+
+
+<!-- =========================
+     PROGRESS
+========================= -->
+
+<div class="progress-container">
+
+    <div class="container">
+
+        <div class="progress">
+
+            <div
+                class="progress-bar"
+                id="progressBar">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<main class="container">
+
+
+<!-- =========================
+     QUIZ
+========================= -->
+
+<div id="quiz"></div>
+
+
+
+<!-- =========================
+     ACTIONS
+========================= -->
+
+<div
+    class="actions"
+    id="actions">
+
+    <button
+        class="main-button"
+        onclick="showResults()">
+
+        Auswertung anzeigen →
+
+    </button>
+
+
+    <button
+        class="main-button secondary"
+        onclick="resetQuiz()">
+
+        Zurücksetzen
+
+    </button>
+
+</div>
+
+
+
+<!-- =========================
+     RESULTS
+========================= -->
+
+<section
+    class="results"
+    id="results">
+
+
+    <!-- BEST COUNTRY -->
+
+    <div class="result-main">
+
+        <small>
+            Dein Länder-Match
+        </small>
+
+        <h2 id="countryName"></h2>
+
+        <p id="countrySummary"></p>
+
+    </div>
+
+
+
+    <div class="result-grid">
+
+
+        <!-- PARTY -->
+
+        <div class="result-card">
+
+            <h3>
+                🇩🇪 Deine Partei
+            </h3>
+
+            <div
+                style="
+                    font-size:2rem;
+                    font-weight:800
+                "
+                id="partyName">
+            </div>
+
+
+            <div class="match">
+
+                <span>
+                    Übereinstimmung
+                </span>
+
+                <strong
+                    id="partyScore">
+                </strong>
+
+            </div>
+
+
+            <div class="bar">
+
+                <div
+                    id="partyBar">
+                </div>
+
+            </div>
+
+
+            <p
+                class="explanation"
+                id="partyReason">
+            </p>
+
+        </div>
+
+
+
+        <!-- COUNTRY -->
+
+        <div class="result-card">
+
+            <h3>
+                🌍 Warum dieses Land?
+            </h3>
+
+            <p
+                class="explanation"
+                id="countryReason">
+            </p>
+
+            <div
+                id="countryTags">
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- OTHER COUNTRIES -->
+
+    <div
+        class="result-card"
+        style="margin-top:18px">
+
+        <h3>
+            Weitere passende Länder
+        </h3>
+
+        <div
+            id="otherCountries">
+        </div>
+
+    </div>
+
+
+
+    <!-- OTHER PARTIES -->
+
+    <div
+        class="result-card"
+        style="margin-top:18px">
+
+        <h3>
+            Weitere Parteien
+        </h3>
+
+        <div
+            id="otherParties">
+        </div>
+
+    </div>
+
+
+
+    <!-- EXPORT -->
+
+    <div
+        class="result-card"
+        style="margin-top:18px">
+
+        <h3>
+            📤 Ergebnis teilen
+        </h3>
+
+        <p class="explanation">
+
+            Speichere dein komplettes Ergebnis
+            als Textdatei.
+
+            Dabei werden auch deine 35 Antworten
+            mitgespeichert.
+
+        </p>
+
+
+        <button
+            class="main-button"
+            onclick="exportTXT()">
+
+            📄 Ergebnis als TXT speichern
+
+        </button>
+
+    </div>
+
+
+
+    <!-- WARNING -->
+
+    <div class="warning">
+
+        <strong>
+            Hinweis:
+        </strong>
+
+        Dieser Werte-Kompass ist ein
+        unabhängiges Modell und kein
+        offizieller Wahl-O-Mat.
+
+        Die Länder- und Parteienprofile
+        sind vereinfachte Modellprofile.
+
+    </div>
+
+
+
+    <!-- RESTART -->
+
+    <div class="actions">
+
+        <button
+            class="main-button"
+            onclick="restart()">
+
+            Nochmal machen
+
+        </button>
+
+    </div>
+
+
+</section>
+
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    Werte-Kompass · Revision 1.0
+
+</footer>
+
+
+
+<script>
+
+
+/* ==========================================================
+   VERSION
+========================================================== */
+
+const REVISION = "1.0";
+
+
+/* ==========================================================
+   FRAGEN
+========================================================== */
+
+const questions = [
+
+    [
+        "Demokratie",
+        "Wie viel sollen die Bürger selbst über die Politik bestimmen können?",
+        "Gar nicht",
+        "Sehr viel"
+    ],
+
+    [
+        "Staatliche Macht",
+        "Wie viel Macht soll der Staat über das Leben der Menschen haben?",
+        "Sehr wenig",
+        "Sehr viel"
+    ],
+
+    [
+        "Wirtschaftliche Freiheit",
+        "Wie frei sollen Menschen und Unternehmen wirtschaften können?",
+        "Stark eingeschränkt",
+        "Sehr frei"
+    ],
+
+    [
+        "Staatsquote",
+        "Wie viel der Wirtschaftsleistung soll der Staat einnehmen und ausgeben?",
+        "Sehr wenig",
+        "Sehr viel"
+    ],
+
+    [
+        "Steuerbelastung",
+        "Wie viel von ihrem Einkommen sollen Menschen an den Staat abgeben?",
+        "Sehr wenig",
+        "Sehr viel"
+    ],
+
+    [
+        "Umverteilung",
+        "Wie stark soll der Staat Geld von Wohlhabenden zu weniger Wohlhabenden umverteilen?",
+        "Kaum",
+        "Sehr stark"
+    ],
+
+    [
+        "Sozialstaat",
+        "Wie stark soll der Staat Menschen finanziell absichern, wenn sie Hilfe brauchen?",
+        "Kaum",
+        "Sehr stark"
+    ],
+
+    [
+        "Privateigentum",
+        "Wie stark soll Privateigentum geschützt sein?",
+        "Wenig Schutz",
+        "Sehr starker Schutz"
+    ],
+
+    [
+        "Regulierung",
+        "Wie viele Regeln soll der Staat für Bürger und Unternehmen aufstellen?",
+        "Sehr wenige",
+        "Sehr viele"
+    ],
+
+    [
+        "Individuelle Freiheit",
+        "Wie frei sollen Menschen ihr Leben nach eigenen Vorstellungen gestalten dürfen?",
+        "Wenig Freiheit",
+        "Maximale Freiheit"
+    ],
+
+    [
+        "Migration",
+        "Wie einfach soll es für Menschen aus anderen Ländern sein, einzuwandern?",
+        "Sehr schwierig",
+        "Sehr einfach"
+    ],
+
+    [
+        "Militär",
+        "Wie viel Geld und Bedeutung soll das Militär bekommen?",
+        "Sehr wenig",
+        "Sehr viel"
+    ],
+
+    [
+        "Umweltpolitik",
+        "Wie stark soll der Staat die Wirtschaft zugunsten von Umwelt- und Klimaschutz einschränken?",
+        "Kaum",
+        "Sehr stark"
+    ],
+
+    [
+        "Zentralisierung",
+        "Wie viel soll die zentrale Regierung entscheiden?",
+        "Sehr dezentral",
+        "Sehr zentral"
+    ],
+
+    [
+        "Internationale Offenheit",
+        "Wie offen soll der Staat gegenüber anderen Ländern, Handel und Zusammenarbeit sein?",
+        "Sehr geschlossen",
+        "Sehr offen"
+    ],
+
+    [
+        "Bildungssystem",
+        "Wie viel soll der Staat für Bildung bereitstellen und wie stark soll er das System bestimmen?",
+        "Wenig",
+        "Sehr viel"
+    ],
+
+    [
+        "Schulpflicht",
+        "Wie stark soll der Staat vorschreiben, dass Kinder eine Schule besuchen müssen?",
+        "Sehr wenig",
+        "Sehr stark"
+    ],
+
+    [
+        "Hochschulen",
+        "Wie stark soll der Staat Studium und Hochschulen finanzieren?",
+        "Sehr wenig",
+        "Sehr stark"
+    ],
+
+    [
+        "Gesundheitsversorgung",
+        "Wie stark soll der Staat dafür sorgen, dass jeder medizinisch versorgt wird?",
+        "Wenig",
+        "Sehr stark"
+    ],
+
+    [
+        "Gesundheitsfreiheit",
+        "Wie frei sollen Menschen selbst entscheiden können, welche medizinischen Leistungen sie nutzen?",
+        "Wenig Freiheit",
+        "Sehr viel Freiheit"
+    ],
+
+    [
+        "Rente",
+        "Wie stark soll der Staat für die finanzielle Absicherung im Alter sorgen?",
+        "Wenig",
+        "Sehr stark"
+    ],
+
+    [
+        "Familienpolitik",
+        "Wie stark soll der Staat Familien und Eltern finanziell unterstützen?",
+        "Wenig",
+        "Sehr stark"
+    ],
+
+    [
+        "Kinderbetreuung",
+        "Wie stark soll der Staat kostenlose bzw. günstige Kinderbetreuung anbieten?",
+        "Wenig",
+        "Sehr stark"
+    ],
+
+    [
+        "Wohnungspolitik",
+        "Wie stark soll der Staat dafür sorgen, dass sich jeder eine Wohnung leisten kann?",
+        "Wenig Eingriff",
+        "Sehr starker Eingriff"
+    ],
+
+    [
+        "Infrastruktur",
+        "Wie viel soll der Staat in Straßen, Bahn, Stromnetze und Internet investieren?",
+        "Wenig",
+        "Sehr viel"
+    ],
+
+    [
+        "Verkehr",
+        "Wie stark soll der Staat den Verkehr steuern und öffentlichen Verkehr fördern?",
+        "Wenig",
+        "Sehr stark"
+    ],
+
+    [
+        "Justiz",
+        "Wie streng soll der Staat Straftaten bestrafen?",
+        "Sehr mild",
+        "Sehr streng"
+    ],
+
+    [
+        "Polizei",
+        "Wie weitreichend sollen die Befugnisse der Polizei sein?",
+        "Sehr begrenzt",
+        "Sehr weitreichend"
+    ],
+
+    [
+        "Datenschutz",
+        "Wie stark soll der Staat die persönlichen Daten der Bürger schützen?",
+        "Wenig",
+        "Sehr stark"
+    ],
+
+    [
+        "Überwachung",
+        "Wie stark darf der Staat seine Bürger überwachen, um Kriminalität zu verhindern?",
+        "Kaum",
+        "Sehr stark"
+    ],
+
+    [
+        "Familienbild",
+        "Wie stark soll der Staat traditionelle Familienmodelle gegenüber anderen Lebensformen fördern?",
+        "Gar nicht",
+        "Sehr stark"
+    ],
+
+    [
+        "Religion",
+        "Wie viel Einfluss soll Religion auf Staat und öffentliches Leben haben?",
+        "Gar keiner",
+        "Sehr viel"
+    ],
+
+    [
+        "Gesellschaftlicher Wandel",
+        "Wie stark soll der Staat gesellschaftliche Veränderungen fördern?",
+        "Nicht fördern",
+        "Stark fördern"
+    ],
+
+    [
+        "Meinungsfreiheit",
+        "Wie weit soll jeder seine Meinung äußern dürfen, auch wenn sie andere provoziert oder beleidigt?",
+        "Stärker einschränken",
+        "Sehr weitgehend"
+    ],
+
+    [
+        "Drogenpolitik",
+        "Wie stark soll der Staat Besitz und Konsum von Drogen verbieten?",
+        "Kaum Verbote",
+        "Sehr starke Verbote"
+    ]
+
+];
+
+
+/* ==========================================================
+   ANTWORTEN
+========================================================== */
+
+let answers =
+    Array(questions.length).fill(null);
+
+
+/* ==========================================================
+   LÄNDER
+========================================================== */
+
+const countries = {
+
+
+"Schweiz": {
+
+    profile: [
+        5,2,5,2,2,1,3,5,2,5,
+        2,3,3,1,5,4,4,4,4,4,
+        3,3,3,2,5,3,3,3,5,1,
+        2,1,2,5,2
+    ],
+
+    summary:
+        "Eine sehr dezentrale Demokratie mit hoher wirtschaftlicher Freiheit und starkem Schutz individueller Rechte.",
+
+    tags: [
+        "Direkte Demokratie",
+        "Föderalismus",
+        "Wirtschaftsfreiheit",
+        "Individuelle Freiheit"
+    ]
+
+},
+
+
+"Dänemark": {
+
+    profile: [
+        4,3,3,3,3,4,5,4,3,4,
+        4,3,4,2,5,5,4,5,5,4,
+        5,5,5,4,5,4,3,3,5,1,
+        3,1,3,5,2
+    ],
+
+    summary:
+        "Starker Sozialstaat kombiniert mit Marktwirtschaft, hoher gesellschaftlicher Freiheit und internationaler Offenheit.",
+
+    tags: [
+        "Sozialstaat",
+        "Gesellschaftlich liberal",
+        "Offen",
+        "Öffentliche Leistungen"
+    ]
+
+},
+
+
+"Deutschland": {
+
+    profile: [
+        3,3,3,3,3,3,4,4,3,4,
+        3,3,4,3,4,4,5,5,5,4,
+        5,4,4,4,5,4,4,3,5,2,
+        3,2,3,4,2
+    ],
+
+    summary:
+        "Soziale Marktwirtschaft mit relativ starkem Sozialstaat, umfangreichen öffentlichen Leistungen und föderaler Struktur.",
+
+    tags: [
+        "Soziale Marktwirtschaft",
+        "Sozialstaat",
+        "Föderalismus",
+        "Öffentliche Leistungen"
+    ]
+
+},
+
+
+"USA": {
+
+    profile: [
+        3,1,5,2,1,1,2,5,1,5,
+        2,5,2,3,5,3,3,2,1,2,
+        1,3,1,1,3,4,5,5,2,0,
+        1,1,1,5,1
+    ],
+
+    summary:
+        "Hohe wirtschaftliche und individuelle Freiheit, vergleichsweise niedrige Abgaben und ein kleinerer Sozialstaat.",
+
+    tags: [
+        "Wirtschaftsfreiheit",
+        "Individuelle Freiheit",
+        "Starkes Militär",
+        "Föderal"
+    ]
+
+},
+
+
+"Niederlande": {
+
+    profile: [
+        4,3,4,3,3,3,4,4,3,5,
+        4,3,4,2,5,5,5,5,5,4,
+        4,4,5,3,5,5,3,3,5,1,
+        2,1,3,5,1
+    ],
+
+    summary:
+        "Offene, wirtschaftlich starke Demokratie mit hoher individueller Freiheit und gut ausgebautem Sozialstaat.",
+
+    tags: [
+        "Offen",
+        "Liberal",
+        "Sozialstaat",
+        "International"
+    ]
+
+},
+
+
+"Norwegen": {
+
+    profile: [
+        4,3,3,4,3,4,5,4,3,4,
+        4,4,4,2,5,5,5,5,5,4,
+        5,5,5,4,5,4,4,3,5,1,
+        3,2,3,5,2
+    ],
+
+    summary:
+        "Sehr starker Sozialstaat und hohe öffentliche Leistungen bei gleichzeitig hoher gesellschaftlicher Freiheit.",
+
+    tags: [
+        "Starker Sozialstaat",
+        "Öffentliche Leistungen",
+        "Offen",
+        "Hohe Lebensqualität"
+    ]
+
+},
+
+
+"Kanada": {
+
+    profile: [
+        4,2,4,3,2,2,4,4,2,5,
+        5,4,3,3,5,4,4,4,5,4,
+        4,4,4,3,5,4,3,3,5,1,
+        2,1,3,5,1
+    ],
+
+    summary:
+        "Offene föderale Demokratie mit relativ hoher individueller Freiheit und umfangreichen öffentlichen Leistungen.",
+
+    tags: [
+        "Föderal",
+        "Offen",
+        "Liberal",
+        "Sozialstaat"
+    ]
+
+},
+
+
+"Singapur": {
+
+    profile: [
+        2,5,4,3,2,1,3,4,4,2,
+        1,4,3,5,5,4,5,5,5,4,
+        3,3,3,4,5,5,5,5,3,3,
+        5,4,4,3,5
+    ],
+
+    summary:
+        "Ein sehr leistungsorientierter, zentraler Staat mit hoher wirtschaftlicher Offenheit und stärkerer staatlicher Kontrolle.",
+
+    tags: [
+        "Zentral",
+        "Wirtschaftlich offen",
+        "Starker Staat",
+        "Ordnung"
+    ]
+
+}
+
+};
+
+
+/* ==========================================================
+   PARTEIEN
+========================================================== */
+
+const parties = {
+
+
+"FDP": [
+
+    3,1,5,1,1,1,2,5,1,5,
+    3,3,2,2,5,3,3,3,3,5,
+    2,2,1,1,3,4,3,2,5,0,
+    1,0,1,5,1
+
+],
+
+
+"CDU/CSU": [
+
+    3,3,4,3,3,2,3,5,3,3,
+    2,4,3,3,4,4,5,5,5,3,
+    4,4,4,2,5,3,4,4,4,3,
+    4,3,2,4,3
+
+],
+
+
+"SPD": [
+
+    4,3,3,4,4,4,5,3,4,3,
+    3,3,4,3,4,5,5,5,5,4,
+    5,5,5,4,5,4,4,3,4,1,
+    2,1,4,5,2
+
+],
+
+
+"Grüne": [
+
+    4,3,3,4,3,4,4,3,4,4,
+    4,3,5,2,5,5,5,5,5,4,
+    4,4,5,4,5,5,3,2,5,1,
+    2,1,5,5,1
+
+],
+
+
+"AfD": [
+
+    2,4,4,2,2,1,1,5,2,3,
+    0,5,1,4,2,1,3,4,2,2,
+    1,1,1,1,2,2,5,5,3,4,
+    5,5,4,2,5
+
+],
+
+
+"Die Linke": [
+
+    4,3,2,5,5,5,5,2,5,4,
+    4,2,5,1,5,5,5,5,5,5,
+    5,5,5,5,5,5,3,2,4,1,
+    1,1,5,5,1
+
+],
+
+
+"BSW": [
+
+    2,4,3,3,3,3,3,4,3,3,
+    1,4,3,4,3,2,4,4,3,3,
+    3,3,3,3,4,3,5,4,3,3,
+    4,4,3,3,4
+
+]
+
+};
+
+
+/* ==========================================================
+   QUIZ ERSTELLEN
+========================================================== */
+
+function renderQuiz() {
+
+    const quiz =
+        document.getElementById("quiz");
+
+
+    quiz.innerHTML =
+        questions.map((q,index)=>`
+
+            <div class="question">
+
+                <div class="question-header">
+
+                    <div class="number">
+                        ${index + 1}
+                    </div>
+
+                    <h2>
+                        ${q[1]}
+                    </h2>
+
+                </div>
+
+
+                <div class="category">
+                    ${q[0]}
+                </div>
+
+
+                <div class="scale">
+
+                    ${[0,1,2,3,4,5]
+                        .map(value=>`
+
+                            <button
+                                id="q${index}-${value}"
+                                onclick="
+                                    answer(
+                                        ${index},
+                                        ${value}
+                                    )
+                                ">
+
+                                ${value}
+
+                            </button>
+
+                        `)
+                        .join("")}
+
+                </div>
+
+
+                <div class="scale-labels">
+
+                    <span>
+                        ${q[2]}
+                    </span>
+
+                    <span>
+                        ${q[3]}
+                    </span>
+
+                </div>
+
+            </div>
+
+        `)
+        .join("");
+
+}
+
+
+/* ==========================================================
+   ANTWORT
+========================================================== */
+
+function answer(question,value) {
+
+    answers[question] =
+        value;
+
+
+    for(let i=0;i<=5;i++) {
+
+        document
+            .getElementById(
+                `q${question}-${i}`
+            )
+            .classList
+            .remove("selected");
+
+    }
+
+
+    document
+        .getElementById(
+            `q${question}-${value}`
+        )
+        .classList
+        .add("selected");
+
+
+    updateProgress();
+
+}
+
+
+/* ==========================================================
+   PROGRESS
+========================================================== */
+
+function updateProgress() {
+
+    const answered =
+        answers.filter(
+            x => x !== null
+        ).length;
+
+
+    const percentage =
+        answered /
+        questions.length *
+        100;
+
+
+    document
+        .getElementById("progressBar")
+        .style.width =
+        percentage + "%";
+
+}
+
+
+/* ==========================================================
+   ÄHNLICHKEIT
+========================================================== */
+
+function similarity(
+    user,
+    profile
+) {
+
+    let totalDifference = 0;
+
+
+    for(
+        let i = 0;
+        i < user.length;
+        i++
+    ) {
+
+        totalDifference +=
+            Math.abs(
+                user[i] -
+                profile[i]
+            );
+
+    }
+
+
+    const average =
+        totalDifference /
+        user.length;
+
+
+    return Math.round(
+
+        (
+            1 -
+            average / 5
+        ) * 100
+
+    );
+
+}
+
+
+/* ==========================================================
+   MATCHES BERECHNEN
+========================================================== */
+
+function calculateMatches(data) {
+
+    return Object
+        .entries(data)
+
+        .map(
+            ([name,profile]) => ({
+
+                name:name,
+
+                profile:profile,
+
+                score:
+                    similarity(
+                        answers,
+                        profile
+                    )
+
+            })
+        )
+
+        .sort(
+            (a,b) =>
+                b.score -
+                a.score
+        );
+
+}
+
+
+/* ==========================================================
+   ERKLÄRUNG
+========================================================== */
+
+function getExplanation(
+    profile,
+    type
+) {
+
+    const differences =
+
+        profile
+            .map(
+                (value,index)=>({
+
+                    index:index,
+
+                    difference:
+                        Math.abs(
+                            answers[index] -
+                            value
+                        )
+
+                })
+            )
+
+            .sort(
+                (a,b) =>
+                    a.difference -
+                    b.difference
+            )
+
+            .slice(0,6);
+
+
+    const topics =
+        differences
+            .map(
+                x =>
+                    questions[
+                        x.index
+                    ][0]
+            );
+
+
+    if(type === "country") {
+
+        return `
+
+            Dein Profil passt besonders gut
+            zu diesem Land.
+
+            Besonders ähnliche Themen sind:
+            <strong>
+                ${topics.join(", ")}
+            </strong>.
+
+        `;
+
+    }
+
+
+    return `
+
+        Deine Antworten liegen besonders nah
+        an diesem Parteiprofil bei:
+
+        <strong>
+            ${topics.join(", ")}
+        </strong>.
+
+    `;
+
+}
+
+
+/* ==========================================================
+   HTML ENTFERNEN
+========================================================== */
+
+function stripHTML(html) {
+
+    const temp =
+        document.createElement("div");
+
+
+    temp.innerHTML =
+        html;
+
+
+    return (
+        temp.textContent ||
+        temp.innerText ||
+        ""
+    );
+
+}
+
+
+/* ==========================================================
+   AUSWERTUNG
+========================================================== */
+
+function showResults() {
+
+
+    if(
+        answers.includes(null)
+    ) {
+
+        const missing =
+            answers.filter(
+                x => x === null
+            ).length;
+
+
+        alert(
+
+            `Bitte beantworte noch ${
+                missing
+            } Frage${
+                missing === 1
+                    ? ""
+                    : "n"
+            }.`
+
+        );
+
+
+        return;
+
+    }
+
+
+    const countryMatches =
+        calculateMatches(
+            countries
+        );
+
+
+    const partyMatches =
+        calculateMatches(
+            parties
+        );
+
+
+    const bestCountry =
+        countryMatches[0];
+
+
+    const bestParty =
+        partyMatches[0];
+
+
+    document
+        .getElementById("quiz")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("actions")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("results")
+        .style.display =
+        "block";
+
+
+    document
+        .getElementById("countryName")
+        .textContent =
+        bestCountry.name;
+
+
+    document
+        .getElementById("countrySummary")
+        .textContent =
+        countries[
+            bestCountry.name
+        ].summary;
+
+
+    document
+        .getElementById("countryReason")
+        .innerHTML =
+        getExplanation(
+            bestCountry.profile,
+            "country"
+        );
+
+
+    document
+        .getElementById("countryTags")
+        .innerHTML =
+
+        countries[
+            bestCountry.name
+        ]
+        .tags
+        .map(
+            tag =>
+                `<span class="tag">
+                    ${tag}
+                </span>`
+        )
+        .join("");
+
+
+    document
+        .getElementById("partyName")
+        .textContent =
+        bestParty.name;
+
+
+    document
+        .getElementById("partyScore")
+        .textContent =
+        bestParty.score +
+        "%";
+
+
+    document
+        .getElementById("partyBar")
+        .style.width =
+        bestParty.score +
+        "%";
+
+
+    document
+        .getElementById("partyReason")
+        .innerHTML =
+        getExplanation(
+            bestParty.profile,
+            "party"
+        );
+
+
+    document
+        .getElementById("otherCountries")
+        .innerHTML =
+
+        countryMatches
+            .slice(1,6)
+
+            .map(
+                match => `
+
+                    <div class="match">
+
+                        <span>
+                            ${match.name}
+                        </span>
+
+                        <strong>
+                            ${match.score}%
+                        </strong>
+
+                    </div>
+
+                    <div class="bar">
+
+                        <div
+                            style="
+                                width:
+                                ${match.score}%
+                            ">
+                        </div>
+
+                    </div>
+
+                `
+            )
+
+            .join("");
+
+
+    document
+        .getElementById("otherParties")
+        .innerHTML =
+
+        partyMatches
+            .slice(1)
+
+            .map(
+                match => `
+
+                    <div class="match">
+
+                        <span>
+                            ${match.name}
+                        </span>
+
+                        <strong>
+                            ${match.score}%
+                        </strong>
+
+                    </div>
+
+                    <div class="bar">
+
+                        <div
+                            style="
+                                width:
+                                ${match.score}%
+                            ">
+                        </div>
+
+                    </div>
+
+                `
+            )
+
+            .join("");
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+/* ==========================================================
+   TXT EXPORT
+========================================================== */
+
+function exportTXT() {
+
+
+    const countryMatches =
+        calculateMatches(
+            countries
+        );
+
+
+    const partyMatches =
+        calculateMatches(
+            parties
+        );
+
+
+    const bestCountry =
+        countryMatches[0];
+
+
+    const bestParty =
+        partyMatches[0];
+
+
+    let text = "";
+
+
+    text +=
+        "MEIN WERTE-KOMPASS\n";
+
+    text +=
+        `Revision ${REVISION}\n`;
+
+    text +=
+        "==================\n\n";
+
+
+    /* COUNTRY */
+
+    text +=
+        "🌍 MEIN LÄNDER-MATCH\n";
+
+    text +=
+        "--------------------\n";
+
+
+    text +=
+        `${bestCountry.name} – ${bestCountry.score}%\n\n`;
+
+
+    text +=
+        "Warum?\n";
+
+
+    text +=
+        stripHTML(
+            getExplanation(
+                bestCountry.profile,
+                "country"
+            )
+        ) +
+        "\n\n";
+
+
+    /* PARTY */
+
+    text +=
+        "🇩🇪 MEIN PARTEIEN-MATCH\n";
+
+    text +=
+        "----------------------\n";
+
+
+    text +=
+        `${bestParty.name} – ${bestParty.score}%\n\n`;
+
+
+    text +=
+        "Warum?\n";
+
+
+    text +=
+        stripHTML(
+            getExplanation(
+                bestParty.profile,
+                "party"
+            )
+        ) +
+        "\n\n";
+
+
+    /* COUNTRIES */
+
+    text +=
+        "🌍 WEITERE PASSENDE LÄNDER\n";
+
+    text +=
+        "--------------------------\n";
+
+
+    countryMatches
+        .slice(1,6)
+        .forEach(
+            (match,index) => {
+
+                text +=
+                    `${index + 2}. ` +
+                    `${match.name} – ` +
+                    `${match.score}%\n`;
+
+            }
+        );
+
+
+    text += "\n";
+
+
+    /* PARTIES */
+
+    text +=
+        "🇩🇪 WEITERE PARTEIEN\n";
+
+    text +=
+        "--------------------\n";
+
+
+    partyMatches
+        .slice(1)
+        .forEach(
+            (match,index) => {
+
+                text +=
+                    `${index + 2}. ` +
+                    `${match.name} – ` +
+                    `${match.score}%\n`;
+
+            }
+        );
+
+
+    text += "\n";
+
+
+    /* ANSWERS */
+
+    text +=
+        "📝 MEINE 35 ANTWORTEN\n";
+
+    text +=
+        "---------------------\n";
+
+
+    questions.forEach(
+        (question,index) => {
+
+            text +=
+                `${index + 1}. ` +
+                `${question[0]}: ` +
+                `${answers[index]}/5\n`;
+
+            text +=
+                `   ${question[1]}\n`;
+
+        }
+    );
+
+
+    text += "\n";
+
+
+    /* FOOTER */
+
+    text +=
+        "==============================\n";
+
+    text +=
+        "Werte-Kompass\n";
+
+    text +=
+        `Revision ${REVISION}\n`;
+
+    text +=
+        "==============================\n\n";
+
+
+    text +=
+        "Hinweis:\n";
+
+    text +=
+        "Dieser Werte-Kompass ist ein " +
+        "unabhängiges Modell und kein " +
+        "offizieller Wahl-O-Mat.\n";
+
+    text +=
+        "Die Prozentwerte stellen " +
+        "Ähnlichkeitswerte zu den " +
+        "hinterlegten Länder- und " +
+        "Parteiprofilen dar.\n";
+
+
+    /* CREATE FILE */
+
+    const blob =
+        new Blob(
+            [text],
+            {
+                type:
+                    "text/plain;charset=utf-8"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const link =
+        document.createElement("a");
+
+
+    link.href =
+        url;
+
+
+    link.download =
+        `mein-werte-kompass-rev-${REVISION}.txt`;
+
+
+    document
+        .body
+        .appendChild(link);
+
+
+    link.click();
+
+
+    document
+        .body
+        .removeChild(link);
+
+
+    URL.revokeObjectURL(url);
+
+}
+
+
+/* ==========================================================
+   RESET
+========================================================== */
+
+function resetQuiz() {
+
+
+    answers =
+        Array(
+            questions.length
+        ).fill(null);
+
+
+    renderQuiz();
+
+
+    updateProgress();
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+/* ==========================================================
+   RESTART
+========================================================== */
+
+function restart() {
+
+
+    document
+        .getElementById("results")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("quiz")
+        .style.display =
+        "block";
+
+
+    document
+        .getElementById("actions")
+        .style.display =
+        "block";
+
+
+    resetQuiz();
+
+}
+
+
+/* ==========================================================
+   START
+========================================================== */
+
+renderQuiz();
+
+</script>
+
+</body>
+</html>
