@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>Werte-Kompass</title>
 
 <style>
+
+/* ==========================================================
+   GRUNDLAGEN
+========================================================== */
 
 * {
     box-sizing: border-box;
 }
 
 body {
+
     margin: 0;
+
     font-family:
         system-ui,
         -apple-system,
@@ -22,269 +34,463 @@ body {
         sans-serif;
 
     background: #f4f6f8;
+
     color: #17202a;
 }
 
 
-/* =========================
+/* ==========================================================
    HEADER
-========================= */
+========================================================== */
 
 header {
+
     background: #17202a;
+
     color: white;
-    padding: 45px 20px;
+
+    padding:
+        45px 20px;
+
     text-align: center;
 }
 
 header h1 {
-    margin: 0 0 10px;
-    font-size: clamp(2rem, 8vw, 3.5rem);
-    letter-spacing: -0.04em;
+
+    margin:
+        0 0 10px;
+
+    font-size:
+        clamp(
+            2rem,
+            8vw,
+            3.5rem
+        );
+
+    letter-spacing:
+        -0.04em;
 }
 
 header p {
-    max-width: 720px;
-    margin: auto;
-    color: #cbd3dc;
-    font-size: 1rem;
+
+    max-width:
+        720px;
+
+    margin:
+        auto;
+
+    color:
+        #cbd3dc;
+
+    font-size:
+        1rem;
+
+    line-height:
+        1.6;
+}
+
+.revision {
+
+    display:
+        inline-block;
+
+    margin-top:
+        15px;
+
+    padding:
+        5px 10px;
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(255,255,255,.1);
+
+    color:
+        #aeb8c5;
+
+    font-size:
+        .72rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        .05em;
 }
 
 
-/* =========================
+/* ==========================================================
    CONTAINER
-========================= */
+========================================================== */
 
 .container {
-    width: min(850px, calc(100% - 24px));
-    margin: auto;
+
+    width:
+        min(
+            850px,
+            calc(100% - 24px)
+        );
+
+    margin:
+        auto;
 }
 
 
-/* =========================
+/* ==========================================================
    PROGRESS
-========================= */
+========================================================== */
 
 .progress-container {
-    position: sticky;
-    top: 0;
-    z-index: 10;
 
-    background: rgba(244,246,248,.94);
-    backdrop-filter: blur(10px);
+    position:
+        sticky;
 
-    padding: 10px 0;
+    top:
+        0;
+
+    z-index:
+        10;
+
+    background:
+        rgba(
+            244,
+            246,
+            248,
+            .94
+        );
+
+    backdrop-filter:
+        blur(10px);
+
+    padding:
+        10px 0;
 }
 
 .progress {
-    height: 8px;
-    background: #dfe4e9;
-    border-radius: 20px;
-    overflow: hidden;
+
+    height:
+        8px;
+
+    background:
+        #dfe4e9;
+
+    border-radius:
+        20px;
+
+    overflow:
+        hidden;
 }
 
 .progress-bar {
-    height: 100%;
-    width: 0%;
 
-    background: #315efb;
+    height:
+        100%;
 
-    transition: width .2s;
+    width:
+        0%;
+
+    background:
+        #315efb;
+
+    transition:
+        width .2s;
+}
+
+.progress-info {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    margin-top:
+        6px;
+
+    color:
+        #7a8490;
+
+    font-size:
+        .75rem;
 }
 
 
-/* =========================
-   QUESTIONS
-========================= */
+/* ==========================================================
+   FRAGEN
+========================================================== */
 
 .question {
-    background: white;
 
-    margin: 16px 0;
-    padding: 24px;
+    background:
+        white;
 
-    border-radius: 20px;
+    margin:
+        16px 0;
+
+    padding:
+        24px;
+
+    border-radius:
+        20px;
 
     box-shadow:
         0 5px 20px rgba(0,0,0,.06);
 }
 
 .question-header {
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
+
+    display:
+        flex;
+
+    gap:
+        14px;
+
+    align-items:
+        flex-start;
 }
 
 .number {
-    flex-shrink: 0;
 
-    width: 36px;
-    height: 36px;
+    flex-shrink:
+        0;
 
-    border-radius: 50%;
+    width:
+        36px;
 
-    background: #eef2ff;
-    color: #315efb;
+    height:
+        36px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius:
+        50%;
 
-    font-weight: bold;
+    background:
+        #eef2ff;
+
+    color:
+        #315efb;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    font-weight:
+        bold;
 }
 
 .question h2 {
-    font-size: 1.1rem;
-    margin: 3px 0 0;
+
+    font-size:
+        1.1rem;
+
+    margin:
+        3px 0 0;
+
+    line-height:
+        1.4;
 }
 
 .category {
-    color: #737d89;
 
-    font-size: .85rem;
+    color:
+        #737d89;
 
-    margin: 8px 0 20px 50px;
+    font-size:
+        .85rem;
+
+    margin:
+        8px 0 20px 50px;
 }
 
 
-/* =========================
-   0–5 SCALE
-========================= */
+/* ==========================================================
+   0–5 SKALA
+========================================================== */
 
 .scale {
-    display: grid;
+
+    display:
+        grid;
 
     grid-template-columns:
         repeat(6, 1fr);
 
-    gap: 8px;
+    gap:
+        8px;
 }
 
 .scale button {
 
-    border: 2px solid #e1e5ea;
+    border:
+        2px solid #e1e5ea;
 
-    background: white;
-    color: #17202a;
+    background:
+        white;
 
-    border-radius: 12px;
+    color:
+        #17202a;
 
-    padding: 13px 5px;
+    border-radius:
+        12px;
 
-    font-size: 1rem;
-    font-weight: bold;
+    padding:
+        13px 5px;
 
-    cursor: pointer;
+    font-size:
+        1rem;
+
+    font-weight:
+        bold;
+
+    cursor:
+        pointer;
 
     transition:
         .15s;
 }
 
 .scale button:hover {
-    border-color: #315efb;
+
+    border-color:
+        #315efb;
 }
 
 .scale button.selected {
 
-    background: #315efb;
+    background:
+        #315efb;
 
-    color: white;
+    color:
+        white;
 
-    border-color: #315efb;
+    border-color:
+        #315efb;
 
-    transform: scale(1.03);
+    transform:
+        scale(1.03);
 }
-
 
 .scale-labels {
 
-    display: flex;
+    display:
+        flex;
 
     justify-content:
         space-between;
 
-    color: #7a8490;
+    color:
+        #7a8490;
 
-    font-size: .75rem;
+    font-size:
+        .75rem;
 
-    margin-top: 8px;
+    margin-top:
+        8px;
 }
 
 
-/* =========================
+/* ==========================================================
    BUTTONS
-========================= */
+========================================================== */
 
 .actions {
 
-    text-align: center;
+    text-align:
+        center;
 
     padding:
-        30px 0
-        60px;
+        30px 0 60px;
 }
 
 .main-button {
 
-    border: none;
+    border:
+        none;
 
-    background: #315efb;
-    color: white;
+    background:
+        #315efb;
+
+    color:
+        white;
 
     padding:
         15px 25px;
 
-    border-radius: 14px;
+    border-radius:
+        14px;
 
-    font-size: 1rem;
+    font-size:
+        1rem;
 
-    font-weight: bold;
+    font-weight:
+        bold;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
-    margin: 5px;
+    margin:
+        5px;
+
+    transition:
+        .15s;
 }
 
 .main-button:hover {
-    opacity: .9;
+
+    opacity:
+        .9;
+
+    transform:
+        translateY(-1px);
 }
 
 .secondary {
 
-    background: white;
+    background:
+        white;
 
-    color: #17202a;
+    color:
+        #17202a;
 
     border:
         1px solid #dce1e6;
 }
 
 
-/* =========================
+/* ==========================================================
    RESULTS
-========================= */
+========================================================== */
 
 .results {
 
-    display: none;
+    display:
+        none;
 
     padding:
-        30px 0
-        70px;
+        30px 0 70px;
 }
-
 
 .result-main {
 
-    background: #17202a;
+    background:
+        #17202a;
 
-    color: white;
+    color:
+        white;
 
-    border-radius: 25px;
+    border-radius:
+        25px;
 
-    padding: 30px;
+    padding:
+        30px;
 
-    margin-bottom: 18px;
+    margin-bottom:
+        18px;
 
     box-shadow:
         0 8px 30px rgba(0,0,0,.08);
@@ -292,21 +498,30 @@ header p {
 
 .result-main small {
 
-    color: #aeb8c5;
+    color:
+        #aeb8c5;
 
-    text-transform: uppercase;
+    text-transform:
+        uppercase;
 
-    letter-spacing: .12em;
+    letter-spacing:
+        .12em;
 
-    font-size: .75rem;
+    font-size:
+        .75rem;
 
-    font-weight: bold;
+    font-weight:
+        bold;
 }
 
 .result-main h2 {
 
     font-size:
-        clamp(2.3rem, 10vw, 4rem);
+        clamp(
+            2.3rem,
+            10vw,
+            4rem
+        );
 
     margin:
         5px 0;
@@ -317,36 +532,43 @@ header p {
 
 .result-main p {
 
-    color: #d3d9e0;
+    color:
+        #d3d9e0;
 
-    margin: 0;
+    margin:
+        0;
 
-    line-height: 1.6;
+    line-height:
+        1.6;
 }
 
 
-/* =========================
+/* ==========================================================
    RESULT GRID
-========================= */
+========================================================== */
 
 .result-grid {
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
         1fr 1fr;
 
-    gap: 18px;
+    gap:
+        18px;
 }
-
 
 .result-card {
 
-    background: white;
+    background:
+        white;
 
-    border-radius: 20px;
+    border-radius:
+        20px;
 
-    padding: 24px;
+    padding:
+        24px;
 
     box-shadow:
         0 5px 20px rgba(0,0,0,.06);
@@ -354,150 +576,181 @@ header p {
 
 .result-card h3 {
 
-    margin-top: 0;
+    margin-top:
+        0;
 
-    font-size: 1.15rem;
+    font-size:
+        1.15rem;
 }
 
 
-/* =========================
+/* ==========================================================
    MATCH BARS
-========================= */
+========================================================== */
 
 .match {
 
-    display: flex;
+    display:
+        flex;
 
     justify-content:
         space-between;
 
     margin:
-        12px 0
-        6px;
+        12px 0 6px;
 }
 
 .bar {
 
-    height: 9px;
+    height:
+        9px;
 
-    background: #e8ebef;
+    background:
+        #e8ebef;
 
-    border-radius: 20px;
+    border-radius:
+        20px;
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
-    margin-bottom: 10px;
+    margin-bottom:
+        10px;
 }
 
 .bar div {
 
-    height: 100%;
+    height:
+        100%;
 
-    background: #315efb;
+    background:
+        #315efb;
 
     transition:
         width .5s;
 }
 
 
-/* =========================
+/* ==========================================================
    TAGS
-========================= */
+========================================================== */
 
 .tag {
 
-    display: inline-block;
+    display:
+        inline-block;
 
-    background: #eef2ff;
+    background:
+        #eef2ff;
 
-    color: #315efb;
+    color:
+        #315efb;
 
     padding:
         5px 9px;
 
-    margin: 3px;
+    margin:
+        3px;
 
-    border-radius: 20px;
+    border-radius:
+        20px;
 
-    font-size: .8rem;
+    font-size:
+        .8rem;
 
-    font-weight: bold;
+    font-weight:
+        bold;
 }
 
 
-/* =========================
+/* ==========================================================
    TEXT
-========================= */
+========================================================== */
 
 .explanation {
 
-    color: #687481;
+    color:
+        #687481;
 
-    line-height: 1.6;
+    line-height:
+        1.6;
 }
 
 
-/* =========================
+/* ==========================================================
    WARNING
-========================= */
+========================================================== */
 
 .warning {
 
-    background: #fff8df;
+    background:
+        #fff8df;
 
     border:
         1px solid #eadb9a;
 
-    color: #66571c;
+    color:
+        #66571c;
 
-    padding: 15px;
+    padding:
+        15px;
 
-    border-radius: 14px;
+    border-radius:
+        14px;
 
-    margin-top: 18px;
+    margin-top:
+        18px;
 
-    font-size: .9rem;
+    font-size:
+        .9rem;
 
-    line-height: 1.5;
+    line-height:
+        1.5;
 }
 
 
-/* =========================
+/* ==========================================================
    FOOTER
-========================= */
+========================================================== */
 
 footer {
 
-    text-align: center;
+    text-align:
+        center;
+
+    color:
+        #89939e;
+
+    font-size:
+        .75rem;
 
     padding:
-        25px 15px
-        35px;
-
-    color: #8a939e;
-
-    font-size: .75rem;
+        20px 10px 40px;
 }
 
 
-/* =========================
+/* ==========================================================
    MOBILE
-========================= */
+========================================================== */
 
 @media(max-width:650px) {
 
     header {
+
         padding:
             30px 16px;
     }
 
     header h1 {
-        font-size: 2.3rem;
+
+        font-size:
+            2.3rem;
     }
 
     .question {
 
-        padding: 18px;
+        padding:
+            18px;
 
         border-radius:
             16px;
@@ -505,12 +758,14 @@ footer {
 
     .category {
 
-        margin-left: 0;
+        margin-left:
+            0;
     }
 
     .scale {
 
-        gap: 5px;
+        gap:
+            5px;
     }
 
     .scale button {
@@ -527,7 +782,8 @@ footer {
 
     .main-button {
 
-        width: 100%;
+        width:
+            100%;
 
         margin:
             5px 0;
@@ -536,15 +792,16 @@ footer {
 }
 
 </style>
+
 </head>
 
 
 <body>
 
 
-<!-- =========================
+<!-- ==========================================================
      HEADER
-========================= -->
+========================================================== -->
 
 <header>
 
@@ -564,13 +821,16 @@ footer {
 
     </p>
 
+    <div class="revision">
+        Revision v1.2.0
+    </div>
+
 </header>
 
 
-
-<!-- =========================
+<!-- ==========================================================
      PROGRESS
-========================= -->
+========================================================== -->
 
 <div class="progress-container">
 
@@ -585,26 +845,36 @@ footer {
 
         </div>
 
+        <div class="progress-info">
+
+            <span id="progressText">
+                0 von 35 beantwortet
+            </span>
+
+            <span>
+                0%
+            </span>
+
+        </div>
+
     </div>
 
 </div>
 
 
-
 <main class="container">
 
 
-<!-- =========================
+<!-- ==========================================================
      QUIZ
-========================= -->
+========================================================== -->
 
 <div id="quiz"></div>
 
 
-
-<!-- =========================
+<!-- ==========================================================
      ACTIONS
-========================= -->
+========================================================== -->
 
 <div
     class="actions"
@@ -630,10 +900,9 @@ footer {
 </div>
 
 
-
-<!-- =========================
+<!-- ==========================================================
      RESULTS
-========================= -->
+========================================================== -->
 
 <section
     class="results"
@@ -655,6 +924,7 @@ footer {
     </div>
 
 
+    <!-- RESULT GRID -->
 
     <div class="result-grid">
 
@@ -682,8 +952,7 @@ footer {
                     Übereinstimmung
                 </span>
 
-                <strong
-                    id="partyScore">
+                <strong id="partyScore">
                 </strong>
 
             </div>
@@ -706,7 +975,6 @@ footer {
         </div>
 
 
-
         <!-- COUNTRY -->
 
         <div class="result-card">
@@ -720,14 +988,12 @@ footer {
                 id="countryReason">
             </p>
 
-            <div
-                id="countryTags">
+            <div id="countryTags">
             </div>
 
         </div>
 
     </div>
-
 
 
     <!-- OTHER COUNTRIES -->
@@ -740,12 +1006,10 @@ footer {
             Weitere passende Länder
         </h3>
 
-        <div
-            id="otherCountries">
+        <div id="otherCountries">
         </div>
 
     </div>
-
 
 
     <!-- OTHER PARTIES -->
@@ -758,12 +1022,10 @@ footer {
             Weitere Parteien
         </h3>
 
-        <div
-            id="otherParties">
+        <div id="otherParties">
         </div>
 
     </div>
-
 
 
     <!-- EXPORT -->
@@ -778,25 +1040,32 @@ footer {
 
         <p class="explanation">
 
-            Speichere dein komplettes Ergebnis
-            als Textdatei.
-
-            Dabei werden auch deine 35 Antworten
-            mitgespeichert.
+            Du kannst dein Ergebnis als
+            TXT-Datei speichern oder direkt
+            über das Teilen-Menü deines
+            Smartphones weitergeben.
 
         </p>
 
 
         <button
             class="main-button"
+            onclick="shareResult()">
+
+            📤 Ergebnis teilen
+
+        </button>
+
+
+        <button
+            class="main-button secondary"
             onclick="exportTXT()">
 
-            📄 Ergebnis als TXT speichern
+            📄 TXT-Datei speichern
 
         </button>
 
     </div>
-
 
 
     <!-- WARNING -->
@@ -817,7 +1086,6 @@ footer {
     </div>
 
 
-
     <!-- RESTART -->
 
     <div class="actions">
@@ -835,30 +1103,29 @@ footer {
 
 </section>
 
-
 </main>
 
 
-<!-- =========================
+<!-- ==========================================================
      FOOTER
-========================= -->
+========================================================== -->
 
 <footer>
 
-    Werte-Kompass · Revision 1.0
+    Werte-Kompass · Revision v1.2.0
 
 </footer>
-
 
 
 <script>
 
 
 /* ==========================================================
-   VERSION
+   REVISION
 ========================================================== */
 
-const REVISION = "1.0";
+const REVISION =
+    "v1.2.0";
 
 
 /* ==========================================================
@@ -1120,7 +1387,9 @@ const questions = [
 ========================================================== */
 
 let answers =
-    Array(questions.length).fill(null);
+    Array(
+        questions.length
+    ).fill(null);
 
 
 /* ==========================================================
@@ -1129,181 +1398,180 @@ let answers =
 
 const countries = {
 
+    "Schweiz": {
 
-"Schweiz": {
+        profile: [
+            5,2,5,2,2,1,3,5,2,5,
+            2,3,3,1,5,4,4,4,4,4,
+            3,3,3,2,5,3,3,3,5,1,
+            2,1,2,5,2
+        ],
 
-    profile: [
-        5,2,5,2,2,1,3,5,2,5,
-        2,3,3,1,5,4,4,4,4,4,
-        3,3,3,2,5,3,3,3,5,1,
-        2,1,2,5,2
-    ],
+        summary:
+            "Eine sehr dezentrale Demokratie mit hoher wirtschaftlicher Freiheit und starkem Schutz individueller Rechte.",
 
-    summary:
-        "Eine sehr dezentrale Demokratie mit hoher wirtschaftlicher Freiheit und starkem Schutz individueller Rechte.",
+        tags: [
+            "Direkte Demokratie",
+            "Föderalismus",
+            "Wirtschaftsfreiheit",
+            "Individuelle Freiheit"
+        ]
 
-    tags: [
-        "Direkte Demokratie",
-        "Föderalismus",
-        "Wirtschaftsfreiheit",
-        "Individuelle Freiheit"
-    ]
-
-},
-
-
-"Dänemark": {
-
-    profile: [
-        4,3,3,3,3,4,5,4,3,4,
-        4,3,4,2,5,5,4,5,5,4,
-        5,5,5,4,5,4,3,3,5,1,
-        3,1,3,5,2
-    ],
-
-    summary:
-        "Starker Sozialstaat kombiniert mit Marktwirtschaft, hoher gesellschaftlicher Freiheit und internationaler Offenheit.",
-
-    tags: [
-        "Sozialstaat",
-        "Gesellschaftlich liberal",
-        "Offen",
-        "Öffentliche Leistungen"
-    ]
-
-},
+    },
 
 
-"Deutschland": {
+    "Dänemark": {
 
-    profile: [
-        3,3,3,3,3,3,4,4,3,4,
-        3,3,4,3,4,4,5,5,5,4,
-        5,4,4,4,5,4,4,3,5,2,
-        3,2,3,4,2
-    ],
+        profile: [
+            4,3,3,3,3,4,5,4,3,4,
+            4,3,4,2,5,5,4,5,5,4,
+            5,5,5,4,5,4,3,3,5,1,
+            3,1,3,5,2
+        ],
 
-    summary:
-        "Soziale Marktwirtschaft mit relativ starkem Sozialstaat, umfangreichen öffentlichen Leistungen und föderaler Struktur.",
+        summary:
+            "Starker Sozialstaat kombiniert mit Marktwirtschaft, hoher gesellschaftlicher Freiheit und internationaler Offenheit.",
 
-    tags: [
-        "Soziale Marktwirtschaft",
-        "Sozialstaat",
-        "Föderalismus",
-        "Öffentliche Leistungen"
-    ]
+        tags: [
+            "Sozialstaat",
+            "Gesellschaftlich liberal",
+            "Offen",
+            "Öffentliche Leistungen"
+        ]
 
-},
-
-
-"USA": {
-
-    profile: [
-        3,1,5,2,1,1,2,5,1,5,
-        2,5,2,3,5,3,3,2,1,2,
-        1,3,1,1,3,4,5,5,2,0,
-        1,1,1,5,1
-    ],
-
-    summary:
-        "Hohe wirtschaftliche und individuelle Freiheit, vergleichsweise niedrige Abgaben und ein kleinerer Sozialstaat.",
-
-    tags: [
-        "Wirtschaftsfreiheit",
-        "Individuelle Freiheit",
-        "Starkes Militär",
-        "Föderal"
-    ]
-
-},
+    },
 
 
-"Niederlande": {
+    "Deutschland": {
 
-    profile: [
-        4,3,4,3,3,3,4,4,3,5,
-        4,3,4,2,5,5,5,5,5,4,
-        4,4,5,3,5,5,3,3,5,1,
-        2,1,3,5,1
-    ],
+        profile: [
+            3,3,3,3,3,3,4,4,3,4,
+            3,3,4,3,4,4,5,5,5,4,
+            5,4,4,4,5,4,4,3,5,2,
+            3,2,3,4,2
+        ],
 
-    summary:
-        "Offene, wirtschaftlich starke Demokratie mit hoher individueller Freiheit und gut ausgebautem Sozialstaat.",
+        summary:
+            "Soziale Marktwirtschaft mit relativ starkem Sozialstaat, umfangreichen öffentlichen Leistungen und föderaler Struktur.",
 
-    tags: [
-        "Offen",
-        "Liberal",
-        "Sozialstaat",
-        "International"
-    ]
+        tags: [
+            "Soziale Marktwirtschaft",
+            "Sozialstaat",
+            "Föderalismus",
+            "Öffentliche Leistungen"
+        ]
 
-},
-
-
-"Norwegen": {
-
-    profile: [
-        4,3,3,4,3,4,5,4,3,4,
-        4,4,4,2,5,5,5,5,5,4,
-        5,5,5,4,5,4,4,3,5,1,
-        3,2,3,5,2
-    ],
-
-    summary:
-        "Sehr starker Sozialstaat und hohe öffentliche Leistungen bei gleichzeitig hoher gesellschaftlicher Freiheit.",
-
-    tags: [
-        "Starker Sozialstaat",
-        "Öffentliche Leistungen",
-        "Offen",
-        "Hohe Lebensqualität"
-    ]
-
-},
+    },
 
 
-"Kanada": {
+    "USA": {
 
-    profile: [
-        4,2,4,3,2,2,4,4,2,5,
-        5,4,3,3,5,4,4,4,5,4,
-        4,4,4,3,5,4,3,3,5,1,
-        2,1,3,5,1
-    ],
+        profile: [
+            3,1,5,2,1,1,2,5,1,5,
+            2,5,2,3,5,3,3,2,1,2,
+            1,3,1,1,3,4,5,5,2,0,
+            1,1,1,5,1
+        ],
 
-    summary:
-        "Offene föderale Demokratie mit relativ hoher individueller Freiheit und umfangreichen öffentlichen Leistungen.",
+        summary:
+            "Hohe wirtschaftliche und individuelle Freiheit, vergleichsweise niedrige Abgaben und ein kleinerer Sozialstaat.",
 
-    tags: [
-        "Föderal",
-        "Offen",
-        "Liberal",
-        "Sozialstaat"
-    ]
+        tags: [
+            "Wirtschaftsfreiheit",
+            "Individuelle Freiheit",
+            "Starkes Militär",
+            "Föderal"
+        ]
 
-},
+    },
 
 
-"Singapur": {
+    "Niederlande": {
 
-    profile: [
-        2,5,4,3,2,1,3,4,4,2,
-        1,4,3,5,5,4,5,5,5,4,
-        3,3,3,4,5,5,5,5,3,3,
-        5,4,4,3,5
-    ],
+        profile: [
+            4,3,4,3,3,3,4,4,3,5,
+            4,3,4,2,5,5,5,5,5,4,
+            4,4,5,3,5,5,3,3,5,1,
+            2,1,3,5,1
+        ],
 
-    summary:
-        "Ein sehr leistungsorientierter, zentraler Staat mit hoher wirtschaftlicher Offenheit und stärkerer staatlicher Kontrolle.",
+        summary:
+            "Offene, wirtschaftlich starke Demokratie mit hoher individueller Freiheit und gut ausgebautem Sozialstaat.",
 
-    tags: [
-        "Zentral",
-        "Wirtschaftlich offen",
-        "Starker Staat",
-        "Ordnung"
-    ]
+        tags: [
+            "Offen",
+            "Liberal",
+            "Sozialstaat",
+            "International"
+        ]
 
-}
+    },
+
+
+    "Norwegen": {
+
+        profile: [
+            4,3,3,4,3,4,5,4,3,4,
+            4,4,4,2,5,5,5,5,5,4,
+            5,5,5,4,5,4,4,3,5,1,
+            3,2,3,5,2
+        ],
+
+        summary:
+            "Sehr starker Sozialstaat und hohe öffentliche Leistungen bei gleichzeitig hoher gesellschaftlicher Freiheit.",
+
+        tags: [
+            "Starker Sozialstaat",
+            "Öffentliche Leistungen",
+            "Offen",
+            "Hohe Lebensqualität"
+        ]
+
+    },
+
+
+    "Kanada": {
+
+        profile: [
+            4,2,4,3,2,2,4,4,2,5,
+            5,4,3,3,5,4,4,4,5,4,
+            4,4,4,3,5,4,3,3,5,1,
+            2,1,3,5,1
+        ],
+
+        summary:
+            "Offene föderale Demokratie mit relativ hoher individueller Freiheit und umfangreichen öffentlichen Leistungen.",
+
+        tags: [
+            "Föderal",
+            "Offen",
+            "Liberal",
+            "Sozialstaat"
+        ]
+
+    },
+
+
+    "Singapur": {
+
+        profile: [
+            2,5,4,3,2,1,3,4,4,2,
+            1,4,3,5,5,4,5,5,5,4,
+            3,3,3,4,5,5,5,5,3,3,
+            5,4,4,3,5
+        ],
+
+        summary:
+            "Ein sehr leistungsorientierter, zentraler Staat mit hoher wirtschaftlicher Offenheit und stärkerer staatlicher Kontrolle.",
+
+        tags: [
+            "Zentral",
+            "Wirtschaftlich offen",
+            "Starker Staat",
+            "Ordnung"
+        ]
+
+    }
 
 };
 
@@ -1314,75 +1582,74 @@ const countries = {
 
 const parties = {
 
+    "FDP": [
 
-"FDP": [
+        3,1,5,1,1,1,2,5,1,5,
+        3,3,2,2,5,3,3,3,3,5,
+        2,2,1,1,3,4,3,2,5,0,
+        1,0,1,5,1
 
-    3,1,5,1,1,1,2,5,1,5,
-    3,3,2,2,5,3,3,3,3,5,
-    2,2,1,1,3,4,3,2,5,0,
-    1,0,1,5,1
-
-],
-
-
-"CDU/CSU": [
-
-    3,3,4,3,3,2,3,5,3,3,
-    2,4,3,3,4,4,5,5,5,3,
-    4,4,4,2,5,3,4,4,4,3,
-    4,3,2,4,3
-
-],
+    ],
 
 
-"SPD": [
+    "CDU/CSU": [
 
-    4,3,3,4,4,4,5,3,4,3,
-    3,3,4,3,4,5,5,5,5,4,
-    5,5,5,4,5,4,4,3,4,1,
-    2,1,4,5,2
+        3,3,4,3,3,2,3,5,3,3,
+        2,4,3,3,4,4,5,5,5,3,
+        4,4,4,2,5,3,4,4,4,3,
+        4,3,2,4,3
 
-],
-
-
-"Grüne": [
-
-    4,3,3,4,3,4,4,3,4,4,
-    4,3,5,2,5,5,5,5,5,4,
-    4,4,5,4,5,5,3,2,5,1,
-    2,1,5,5,1
-
-],
+    ],
 
 
-"AfD": [
+    "SPD": [
 
-    2,4,4,2,2,1,1,5,2,3,
-    0,5,1,4,2,1,3,4,2,2,
-    1,1,1,1,2,2,5,5,3,4,
-    5,5,4,2,5
+        4,3,3,4,4,4,5,3,4,3,
+        3,3,4,3,4,5,5,5,5,4,
+        5,5,5,4,5,4,4,3,4,1,
+        2,1,4,5,2
 
-],
-
-
-"Die Linke": [
-
-    4,3,2,5,5,5,5,2,5,4,
-    4,2,5,1,5,5,5,5,5,5,
-    5,5,5,5,5,5,3,2,4,1,
-    1,1,5,5,1
-
-],
+    ],
 
 
-"BSW": [
+    "Grüne": [
 
-    2,4,3,3,3,3,3,4,3,3,
-    1,4,3,4,3,2,4,4,3,3,
-    3,3,3,3,4,3,5,4,3,3,
-    4,4,3,3,4
+        4,3,3,4,3,4,4,3,4,4,
+        4,3,5,2,5,5,5,5,5,4,
+        4,4,5,4,5,5,3,2,5,1,
+        2,1,5,5,1
 
-]
+    ],
+
+
+    "AfD": [
+
+        2,4,4,2,2,1,1,5,2,3,
+        0,5,1,4,2,1,3,4,2,2,
+        1,1,1,1,2,2,5,5,3,4,
+        5,5,4,2,5
+
+    ],
+
+
+    "Die Linke": [
+
+        4,3,2,5,5,5,5,2,5,4,
+        4,2,5,1,5,5,5,5,5,5,
+        5,5,5,5,5,5,3,2,4,1,
+        1,1,5,5,1
+
+    ],
+
+
+    "BSW": [
+
+        2,4,3,3,3,3,3,4,3,3,
+        1,4,3,4,3,2,4,4,3,3,
+        3,3,3,3,4,3,5,4,3,3,
+        4,4,3,3,4
+
+    ]
 
 };
 
@@ -1398,68 +1665,74 @@ function renderQuiz() {
 
 
     quiz.innerHTML =
-        questions.map((q,index)=>`
 
-            <div class="question">
+        questions
+            .map((q, index) => `
 
-                <div class="question-header">
+                <div class="question">
 
-                    <div class="number">
-                        ${index + 1}
+                    <div class="question-header">
+
+                        <div class="number">
+                            ${index + 1}
+                        </div>
+
+                        <h2>
+                            ${q[1]}
+                        </h2>
+
                     </div>
 
-                    <h2>
-                        ${q[1]}
-                    </h2>
+
+                    <div class="category">
+                        ${q[0]}
+                    </div>
+
+
+                    <div class="scale">
+
+                        ${[0,1,2,3,4,5]
+
+                            .map(value => `
+
+                                <button
+                                    id="q${index}-${value}"
+                                    onclick="
+                                        answer(
+                                            ${index},
+                                            ${value}
+                                        )
+                                    "
+                                >
+
+                                    ${value}
+
+                                </button>
+
+                            `)
+
+                            .join("")}
+
+                    </div>
+
+
+                    <div class="scale-labels">
+
+                        <span>
+                            ${q[2]}
+                        </span>
+
+                        <span>
+                            ${q[3]}
+                        </span>
+
+                    </div>
 
                 </div>
 
+            `)
 
-                <div class="category">
-                    ${q[0]}
-                </div>
-
-
-                <div class="scale">
-
-                    ${[0,1,2,3,4,5]
-                        .map(value=>`
-
-                            <button
-                                id="q${index}-${value}"
-                                onclick="
-                                    answer(
-                                        ${index},
-                                        ${value}
-                                    )
-                                ">
-
-                                ${value}
-
-                            </button>
-
-                        `)
-                        .join("")}
-
-                </div>
-
-
-                <div class="scale-labels">
-
-                    <span>
-                        ${q[2]}
-                    </span>
-
-                    <span>
-                        ${q[3]}
-                    </span>
-
-                </div>
-
-            </div>
-
-        `)
-        .join("");
+            .join("");
 
 }
 
@@ -1468,13 +1741,17 @@ function renderQuiz() {
    ANTWORT
 ========================================================== */
 
-function answer(question,value) {
+function answer(question, value) {
 
     answers[question] =
         value;
 
 
-    for(let i=0;i<=5;i++) {
+    for (
+        let i = 0;
+        i <= 5;
+        i++
+    ) {
 
         document
             .getElementById(
@@ -1511,15 +1788,43 @@ function updateProgress() {
         ).length;
 
 
+    const total =
+        questions.length;
+
+
     const percentage =
-        answered /
-        questions.length *
-        100;
+        Math.round(
+            answered /
+            total *
+            100
+        );
 
 
     document
-        .getElementById("progressBar")
+        .getElementById(
+            "progressBar"
+        )
         .style.width =
+        percentage + "%";
+
+
+    document
+        .getElementById(
+            "progressText"
+        )
+        .textContent =
+
+        `${answered} von ${total} beantwortet`;
+
+
+    const percentageElement =
+        document
+            .querySelector(
+                ".progress-info span:last-child"
+            );
+
+
+    percentageElement.textContent =
         percentage + "%";
 
 }
@@ -1527,21 +1832,30 @@ function updateProgress() {
 
 /* ==========================================================
    ÄHNLICHKEIT
+   UNBEANTWORTETE FRAGEN WERDEN IGNORIERT
 ========================================================== */
 
-function similarity(
-    user,
-    profile
-) {
+function similarity(user, profile) {
 
     let totalDifference = 0;
 
+    let answeredCount = 0;
 
-    for(
+
+    for (
         let i = 0;
         i < user.length;
         i++
     ) {
+
+        if (
+            user[i] === null
+        ) {
+
+            continue;
+
+        }
+
 
         totalDifference +=
             Math.abs(
@@ -1549,12 +1863,24 @@ function similarity(
                 profile[i]
             );
 
+
+        answeredCount++;
+
+    }
+
+
+    if (
+        answeredCount === 0
+    ) {
+
+        return 0;
+
     }
 
 
     const average =
         totalDifference /
-        user.length;
+        answeredCount;
 
 
     return Math.round(
@@ -1579,11 +1905,13 @@ function calculateMatches(data) {
         .entries(data)
 
         .map(
-            ([name,profile]) => ({
+            ([name, profile]) => ({
 
-                name:name,
+                name:
+                    name,
 
-                profile:profile,
+                profile:
+                    profile,
 
                 score:
                     similarity(
@@ -1595,7 +1923,7 @@ function calculateMatches(data) {
         )
 
         .sort(
-            (a,b) =>
+            (a, b) =>
                 b.score -
                 a.score
         );
@@ -1615,27 +1943,46 @@ function getExplanation(
     const differences =
 
         profile
+
             .map(
-                (value,index)=>({
+                (value, index) => {
 
-                    index:index,
+                    if (
+                        answers[index] === null
+                    ) {
 
-                    difference:
-                        Math.abs(
-                            answers[index] -
-                            value
-                        )
+                        return null;
 
-                })
+                    }
+
+
+                    return {
+
+                        index:
+                            index,
+
+                        difference:
+                            Math.abs(
+                                answers[index] -
+                                value
+                            )
+
+                    };
+
+                }
+            )
+
+            .filter(
+                x => x !== null
             )
 
             .sort(
-                (a,b) =>
+                (a, b) =>
                     a.difference -
                     b.difference
             )
 
-            .slice(0,6);
+            .slice(0, 6);
 
 
     const topics =
@@ -1648,7 +1995,24 @@ function getExplanation(
             );
 
 
-    if(type === "country") {
+    if (
+        topics.length === 0
+    ) {
+
+        return `
+
+            Beantworte einige Fragen,
+            damit dein Profil ausgewertet
+            werden kann.
+
+        `;
+
+    }
+
+
+    if (
+        type === "country"
+    ) {
 
         return `
 
@@ -1656,6 +2020,7 @@ function getExplanation(
             zu diesem Land.
 
             Besonders ähnliche Themen sind:
+
             <strong>
                 ${topics.join(", ")}
             </strong>.
@@ -1686,7 +2051,9 @@ function getExplanation(
 function stripHTML(html) {
 
     const temp =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     temp.innerHTML =
@@ -1708,33 +2075,28 @@ function stripHTML(html) {
 
 function showResults() {
 
+    const answered =
+        answers.filter(
+            x => x !== null
+        ).length;
 
-    if(
-        answers.includes(null)
+
+    if (
+        answered === 0
     ) {
 
-        const missing =
-            answers.filter(
-                x => x === null
-            ).length;
-
-
         alert(
-
-            `Bitte beantworte noch ${
-                missing
-            } Frage${
-                missing === 1
-                    ? ""
-                    : "n"
-            }.`
-
+            "Bitte beantworte mindestens eine Frage."
         );
-
 
         return;
 
     }
+
+
+    const unanswered =
+        questions.length -
+        answered;
 
 
     const countryMatches =
@@ -1757,32 +2119,46 @@ function showResults() {
         partyMatches[0];
 
 
+    /* QUIZ AUSBLENDEN */
+
     document
-        .getElementById("quiz")
+        .getElementById(
+            "quiz"
+        )
         .style.display =
         "none";
 
 
     document
-        .getElementById("actions")
+        .getElementById(
+            "actions"
+        )
         .style.display =
         "none";
 
 
     document
-        .getElementById("results")
+        .getElementById(
+            "results"
+        )
         .style.display =
         "block";
 
 
+    /* LAND */
+
     document
-        .getElementById("countryName")
+        .getElementById(
+            "countryName"
+        )
         .textContent =
         bestCountry.name;
 
 
     document
-        .getElementById("countrySummary")
+        .getElementById(
+            "countrySummary"
+        )
         .textContent =
         countries[
             bestCountry.name
@@ -1790,7 +2166,9 @@ function showResults() {
 
 
     document
-        .getElementById("countryReason")
+        .getElementById(
+            "countryReason"
+        )
         .innerHTML =
         getExplanation(
             bestCountry.profile,
@@ -1799,44 +2177,58 @@ function showResults() {
 
 
     document
-        .getElementById("countryTags")
+        .getElementById(
+            "countryTags"
+        )
         .innerHTML =
 
         countries[
             bestCountry.name
         ]
         .tags
+
         .map(
             tag =>
                 `<span class="tag">
                     ${tag}
                 </span>`
         )
+
         .join("");
 
 
+    /* PARTEI */
+
     document
-        .getElementById("partyName")
+        .getElementById(
+            "partyName"
+        )
         .textContent =
         bestParty.name;
 
 
     document
-        .getElementById("partyScore")
+        .getElementById(
+            "partyScore"
+        )
         .textContent =
         bestParty.score +
         "%";
 
 
     document
-        .getElementById("partyBar")
+        .getElementById(
+            "partyBar"
+        )
         .style.width =
         bestParty.score +
         "%";
 
 
     document
-        .getElementById("partyReason")
+        .getElementById(
+            "partyReason"
+        )
         .innerHTML =
         getExplanation(
             bestParty.profile,
@@ -1844,12 +2236,17 @@ function showResults() {
         );
 
 
+    /* WEITERE LÄNDER */
+
     document
-        .getElementById("otherCountries")
+        .getElementById(
+            "otherCountries"
+        )
         .innerHTML =
 
         countryMatches
-            .slice(1,6)
+
+            .slice(1, 6)
 
             .map(
                 match => `
@@ -1872,7 +2269,8 @@ function showResults() {
                             style="
                                 width:
                                 ${match.score}%
-                            ">
+                            "
+                        >
                         </div>
 
                     </div>
@@ -1883,11 +2281,16 @@ function showResults() {
             .join("");
 
 
+    /* WEITERE PARTEIEN */
+
     document
-        .getElementById("otherParties")
+        .getElementById(
+            "otherParties"
+        )
         .innerHTML =
 
         partyMatches
+
             .slice(1)
 
             .map(
@@ -1911,7 +2314,8 @@ function showResults() {
                             style="
                                 width:
                                 ${match.score}%
-                            ">
+                            "
+                        >
                         </div>
 
                     </div>
@@ -1922,11 +2326,87 @@ function showResults() {
             .join("");
 
 
+    /* UNBEANTWORTETE FRAGEN */
+
+    let warning =
+        document.getElementById(
+            "answerWarning"
+        );
+
+
+    if (!warning) {
+
+        warning =
+            document.createElement(
+                "div"
+            );
+
+
+        warning.id =
+            "answerWarning";
+
+
+        warning.className =
+            "warning";
+
+
+        document
+            .getElementById(
+                "results"
+            )
+            .prepend(
+                warning
+            );
+
+    }
+
+
+    if (
+        unanswered > 0
+    ) {
+
+        warning.style.display =
+            "block";
+
+
+        warning.innerHTML = `
+
+            <strong>
+                ℹ️ Hinweis:
+            </strong>
+
+            Du hast
+            ${answered}
+            von
+            ${questions.length}
+            Fragen beantwortet.
+
+            Die
+            ${unanswered}
+            unbeantworteten Fragen
+            wurden bei der Auswertung
+            vollständig ignoriert.
+
+            Je mehr Fragen du beantwortest,
+            desto aussagekräftiger wird dein Ergebnis.
+
+        `;
+
+    } else {
+
+        warning.style.display =
+            "none";
+
+    }
+
+
     window.scrollTo({
 
-        top:0,
+        top:
+            0,
 
-        behavior:"smooth"
+        behavior:
+            "smooth"
 
     });
 
@@ -1934,11 +2414,10 @@ function showResults() {
 
 
 /* ==========================================================
-   TXT EXPORT
+   TXT ERSTELLEN
 ========================================================== */
 
-function exportTXT() {
-
+function createTXT() {
 
     const countryMatches =
         calculateMatches(
@@ -1960,6 +2439,12 @@ function exportTXT() {
         partyMatches[0];
 
 
+    const answered =
+        answers.filter(
+            x => x !== null
+        ).length;
+
+
     let text = "";
 
 
@@ -1967,13 +2452,19 @@ function exportTXT() {
         "MEIN WERTE-KOMPASS\n";
 
     text +=
-        `Revision ${REVISION}\n`;
-
-    text +=
         "==================\n\n";
 
 
-    /* COUNTRY */
+    text +=
+        `Revision: ${REVISION}\n`;
+
+    text +=
+        `Beantwortete Fragen: ${
+            answered
+        }/${questions.length}\n\n`;
+
+
+    /* LAND */
 
     text +=
         "🌍 MEIN LÄNDER-MATCH\n";
@@ -1983,7 +2474,9 @@ function exportTXT() {
 
 
     text +=
-        `${bestCountry.name} – ${bestCountry.score}%\n\n`;
+        `${bestCountry.name} – ${
+            bestCountry.score
+        }%\n\n`;
 
 
     text +=
@@ -2000,7 +2493,20 @@ function exportTXT() {
         "\n\n";
 
 
-    /* PARTY */
+    text +=
+        "Tags:\n";
+
+
+    text +=
+        countries[
+            bestCountry.name
+        ]
+        .tags
+        .join(", ") +
+        "\n\n";
+
+
+    /* PARTEI */
 
     text +=
         "🇩🇪 MEIN PARTEIEN-MATCH\n";
@@ -2010,7 +2516,9 @@ function exportTXT() {
 
 
     text +=
-        `${bestParty.name} – ${bestParty.score}%\n\n`;
+        `${bestParty.name} – ${
+            bestParty.score
+        }%\n\n`;
 
 
     text +=
@@ -2027,7 +2535,7 @@ function exportTXT() {
         "\n\n";
 
 
-    /* COUNTRIES */
+    /* LÄNDER */
 
     text +=
         "🌍 WEITERE PASSENDE LÄNDER\n";
@@ -2037,9 +2545,11 @@ function exportTXT() {
 
 
     countryMatches
-        .slice(1,6)
+
+        .slice(1, 6)
+
         .forEach(
-            (match,index) => {
+            (match, index) => {
 
                 text +=
                     `${index + 2}. ` +
@@ -2053,7 +2563,7 @@ function exportTXT() {
     text += "\n";
 
 
-    /* PARTIES */
+    /* PARTEIEN */
 
     text +=
         "🇩🇪 WEITERE PARTEIEN\n";
@@ -2063,9 +2573,11 @@ function exportTXT() {
 
 
     partyMatches
+
         .slice(1)
+
         .forEach(
-            (match,index) => {
+            (match, index) => {
 
                 text +=
                     `${index + 2}. ` +
@@ -2079,22 +2591,29 @@ function exportTXT() {
     text += "\n";
 
 
-    /* ANSWERS */
+    /* ANTWORTEN */
 
     text +=
-        "📝 MEINE 35 ANTWORTEN\n";
+        "📝 MEINE ANTWORTEN\n";
 
     text +=
-        "---------------------\n";
+        "------------------\n";
 
 
     questions.forEach(
-        (question,index) => {
+        (question, index) => {
+
+            const answer =
+                answers[index] === null
+                    ? "nicht beantwortet"
+                    : answers[index] + "/5";
+
 
             text +=
                 `${index + 1}. ` +
                 `${question[0]}: ` +
-                `${answers[index]}/5\n`;
+                `${answer}\n`;
+
 
             text +=
                 `   ${question[1]}\n`;
@@ -2136,48 +2655,223 @@ function exportTXT() {
         "Parteiprofilen dar.\n";
 
 
-    /* CREATE FILE */
+    return text;
 
-    const blob =
-        new Blob(
-            [text],
-            {
-                type:
-                    "text/plain;charset=utf-8"
-            }
+}
+
+
+/* ==========================================================
+   TXT DOWNLOAD
+========================================================== */
+
+function exportTXT() {
+
+    try {
+
+        const text =
+            createTXT();
+
+
+        const blob =
+            new Blob(
+                [text],
+                {
+                    type:
+                        "text/plain;charset=utf-8"
+                }
+            );
+
+
+        const url =
+            URL.createObjectURL(
+                blob
+            );
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href =
+            url;
+
+
+        link.download =
+            "mein-werte-kompass.txt";
+
+
+        link.style.display =
+            "none";
+
+
+        document
+            .body
+            .appendChild(
+                link
+            );
+
+
+        link.click();
+
+
+        setTimeout(
+            () => {
+
+                document
+                    .body
+                    .removeChild(
+                        link
+                    );
+
+
+                URL.revokeObjectURL(
+                    url
+                );
+
+            },
+            100
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "TXT Export Fehler:",
+            error
         );
 
 
-    const url =
-        URL.createObjectURL(blob);
+        alert(
+            "Die TXT-Datei konnte leider nicht erstellt werden."
+        );
+
+    }
+
+}
 
 
-    const link =
-        document.createElement("a");
+/* ==========================================================
+   ERGEBNIS TEILEN
+========================================================== */
+
+async function shareResult() {
+
+    const text =
+        createTXT();
 
 
-    link.href =
-        url;
+    try {
+
+        /*
+         * Moderne Smartphones können
+         * die TXT-Datei direkt teilen.
+         */
+
+        if (
+            navigator.share &&
+            navigator.canShare
+        ) {
+
+            const file =
+                new File(
+                    [text],
+                    "mein-werte-kompass.txt",
+                    {
+                        type:
+                            "text/plain"
+                    }
+                );
 
 
-    link.download =
-        `mein-werte-kompass-rev-${REVISION}.txt`;
+            if (
+                navigator.canShare({
+                    files: [file]
+                })
+            ) {
+
+                await navigator.share({
+
+                    title:
+                        "Mein Werte-Kompass",
+
+                    text:
+                        "Mein Ergebnis aus dem Werte-Kompass.",
+
+                    files:
+                        [file]
+
+                });
 
 
-    document
-        .body
-        .appendChild(link);
+                return;
+
+            }
+
+        }
 
 
-    link.click();
+        /*
+         * Falls der Browser keine Dateien
+         * teilen kann, versuchen wir normales
+         * Text-Teilen.
+         */
+
+        if (
+            navigator.share
+        ) {
+
+            await navigator.share({
+
+                title:
+                    "Mein Werte-Kompass",
+
+                text:
+                    text
+
+            });
 
 
-    document
-        .body
-        .removeChild(link);
+            return;
+
+        }
 
 
-    URL.revokeObjectURL(url);
+        /*
+         * Desktop-Fallback
+         */
+
+        exportTXT();
+
+    }
+
+    catch (error) {
+
+        /*
+         * Wenn der Nutzer das Teilen-Menü
+         * selbst abbricht, nichts tun.
+         */
+
+        if (
+            error.name ===
+            "AbortError"
+        ) {
+
+            return;
+
+        }
+
+
+        /*
+         * Bei anderen Fehlern:
+         * TXT herunterladen.
+         */
+
+        exportTXT();
+
+    }
 
 }
 
@@ -2187,7 +2881,6 @@ function exportTXT() {
 ========================================================== */
 
 function resetQuiz() {
-
 
     answers =
         Array(
@@ -2203,9 +2896,11 @@ function resetQuiz() {
 
     window.scrollTo({
 
-        top:0,
+        top:
+            0,
 
-        behavior:"smooth"
+        behavior:
+            "smooth"
 
     });
 
@@ -2218,21 +2913,26 @@ function resetQuiz() {
 
 function restart() {
 
-
     document
-        .getElementById("results")
+        .getElementById(
+            "results"
+        )
         .style.display =
         "none";
 
 
     document
-        .getElementById("quiz")
+        .getElementById(
+            "quiz"
+        )
         .style.display =
         "block";
 
 
     document
-        .getElementById("actions")
+        .getElementById(
+            "actions"
+        )
         .style.display =
         "block";
 
@@ -2248,7 +2948,10 @@ function restart() {
 
 renderQuiz();
 
+updateProgress();
+
 </script>
 
 </body>
+
 </html>
